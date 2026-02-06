@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Joyguru Travels website deployment with an enquiry flow update to have all WhatsApp/Send Message buttons open WhatsApp with a pre-filled enquiry message.",
+  "architectural_notes": [
+    "Use WhatsApp wa.me deep link with URL-encoded pre-filled text including fields: Name, Destination, Travel Date, Number of Persons."
+  ],
+  "known_issues": [
+    "Possible regression: Tour package details content previously added on a page was deleted/removed after the latest update."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-shared-whatsapp-link-builder-utility-that-opens-https-wa-me-919531757771-with-a-url-encoded-text-payload-using-the-exact-pre-filled-enquiry-message-template-hello-i-would-like-to-enquire-about-a-trip-name-name-destination-destination-travel-date-travel-date-number-of-persons-persons-the-utility-must-safely-url-encode-the-message-e-g-via-encodeuricomponent-and-expose-a-simple-api-usable-by-all-buttons-links",
+      "title": "Create a shared WhatsApp link builder utility that opens `https://wa.me/919531757771` with a URL-encoded `text=` payload using the exact pre-filled enquiry message template:\n\n\"Hello, I would like to enquire about a trip.\nName: [Name]\nDestination: [Destination]\nTravel Date: [Travel Date]\nNumber of Persons: [Persons]\"\n\nThe utility must safely URL-encode the message (e.g., via `encodeURIComponent`) and expose a simple API usable by all buttons/links.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-floating-whatsapp-button-component-to-use-the-shared-whatsapp-link-builder-and-include-the-pre-filled-enquiry-message-template-if-no-user-entered-values-are-available-at-click-time-the-pre-filled-message-must-still-include-the-four-labeled-lines-name-destination-travel-date-number-of-persons-with-blank-values-after-the-colons",
+      "title": "Update the floating WhatsApp button component to use the shared WhatsApp link builder and include the pre-filled enquiry message template. If no user-entered values are available at click time, the pre-filled message must still include the four labeled lines (Name/Destination/Travel Date/Number of Persons) with blank values after the colons.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-topbar-whatsapp-link-to-use-the-shared-whatsapp-link-builder-and-include-the-same-pre-filled-enquiry-message-template-with-blank-values-if-no-user-entered-values-are-available",
+      "title": "Update the TopBar WhatsApp link to use the shared WhatsApp link builder and include the same pre-filled enquiry message template (with blank values if no user-entered values are available).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-enquirypage-so-the-primary-send-message-action-opens-whatsapp-to-919531757771-with-a-pre-filled-enquiry-message-containing-the-visitor-provided-values-for-name-destination-travel-date-and-number-of-persons-replace-the-current-backend-contact-form-submission-behavior-for-this-button-add-adjust-form-fields-as-needed-so-the-page-collects-exactly-these-four-values-for-the-whatsapp-message",
+      "title": "Update the EnquiryPage so the primary \"Send Message\" action opens WhatsApp (to `919531757771`) with a pre-filled enquiry message containing the visitor-provided values for Name, Destination, Travel Date, and Number of Persons. Replace the current backend contact-form submission behavior for this button.\n\nAdd/adjust form fields as needed so the page collects exactly these four values for the WhatsApp message.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-contactpage-so-the-primary-send-message-action-opens-whatsapp-to-919531757771-with-a-pre-filled-enquiry-message-containing-the-visitor-provided-values-for-name-destination-travel-date-and-number-of-persons-replace-the-current-backend-contact-form-submission-behavior-for-this-button-add-adjust-form-fields-as-needed-so-the-page-collects-exactly-these-four-values-for-the-whatsapp-message",
+      "title": "Update the ContactPage so the primary \"Send Message\" action opens WhatsApp (to `919531757771`) with a pre-filled enquiry message containing the visitor-provided values for Name, Destination, Travel Date, and Number of Persons. Replace the current backend contact-form submission behavior for this button.\n\nAdd/adjust form fields as needed so the page collects exactly these four values for the WhatsApp message.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-audit-the-frontend-for-any-other-whatsapp-links-wa-me-and-any-other-buttons-labeled-send-message-and-update-them-to-use-the-shared-whatsapp-link-builder-so-that-they-open-whatsapp-with-the-same-pre-filled-enquiry-message-template-using-available-values-when-present-otherwise-leaving-values-blank",
+      "title": "Audit the frontend for any other WhatsApp links (`wa.me`) and any other buttons labeled \"Send Message\" and update them to use the shared WhatsApp link builder so that they open WhatsApp with the same pre-filled enquiry message template (using available values when present, otherwise leaving values blank).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-home-page-continues-to-show-travel-package-details-clearly-for-each-package-returned-by-getactivepackages-and-that-the-ui-does-not-regress-to-hiding-or-removing-the-package-details-text-the-admin-entered",
+      "title": "Ensure the Home page continues to show Travel Package details clearly for each package returned by getActivePackages, and that the UI does not regress to hiding or removing the package details text the admin entered.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-basic-developer-visible-safeguard-for-empty-travel-packages-caused-by-past-upgrades-when-data-may-already-be-lost-so-admins-can-quickly-detect-the-issue-and-re-add-packages-if-needed",
+      "title": "Add a basic developer-visible safeguard for empty Travel Packages caused by past upgrades (when data may already be lost), so admins can quickly detect the issue and re-add packages if needed.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Update all WhatsApp and Send Message buttons to open WhatsApp with a pre-filled enquiry message (Name, Destination, Travel Date, Number of Persons).",
+      "reqIds": [],
+      "status": "in_progress"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Investigate and fix the regression where previously added Tour/Travel Package details disappeared after the latest deployment by persisting all existing backend stored data across canister upgrades (so admin-entered destinations/packages are not wiped on new versions).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Joyguru Travels",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

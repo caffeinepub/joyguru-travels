@@ -1,0 +1,48 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Restore Travel Package details visibility and add empty-packages safeguards",
+  "requirements": [
+    {
+      "id": "REQ-8",
+      "summary": "Ensure Home page package cards show admin-entered details and keep long details accessible without removing text.",
+      "acceptanceCriteria": [
+        "On HomePage, each card in the “Holiday Packages” section displays the package title and the package details text (pkg.details) from the backend.",
+        "If the details text is long, it is still accessible (e.g., via expansion, modal, or non-destructive layout), rather than being silently removed from the UI.",
+        "All user-facing text remains in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/PackageDetailsDialog.tsx",
+          "operation": "create",
+          "description": "Create a reusable Travel Package details viewer using the shadcn-ui Dialog component to present full pkg.title, pkg.details, and key metadata in a non-destructive modal. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Update the “Holiday Packages” cards to (1) always render pkg.details (e.g., a short preview) and (2) wire the existing “View Details” button to open PackageDetailsDialog showing the full, untruncated details text so long content remains accessible. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add clear empty states when Travel Packages are missing so admins can detect past data loss quickly.",
+      "acceptanceCriteria": [
+        "If getActivePackages returns an empty list, HomePage shows a clear empty state message indicating no packages are available.",
+        "AdminDashboard “Current Packages” continues to show the count and list of packages returned by the backend, making it obvious when packages are missing."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Strengthen the Holiday Packages empty state copy to explicitly state that no travel packages are available, and include a developer-visible console warning when packages load as an empty list (without blocking normal users). Keep all text in English."
+        },
+        {
+          "path": "frontend/src/pages/AdminDashboard.tsx",
+          "operation": "modify",
+          "description": "In the “Current Packages” panel, add a clear empty-state message when packages.length===0 while keeping the existing count in the header, so missing packages are immediately obvious to admins."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-06T04:53:31.218Z",
+  "summary": "The diff adds a migration module and a new PackageDetailsDialog modal, and updates HomePage/AdminDashboard. However, the provided changes do not clearly implement upgrade-safe persistence for all backend data (REQ-7), and the HomePage empty-state message for missing packages (REQ-9) is not shown—only a developer console warning is present. Additionally, the diff includes multiple unrelated WhatsApp/enquiry-flow and styling changes not requested in this BuildRequest.",
+  "missing_requirements": [
+    {
+      "id": "REQ-7",
+      "requirement": "Persist all existing backend stored data across canister upgrades so previously created Destinations/Travel Packages (and other entities) and ID counters survive upgrades; keep all upgrade logic within backend/main.mo (migration.mo only if required).",
+      "reason": "The diff shows non-stable in-memory variables/maps/lists being (re)initialized (e.g., destinations/packages/flights/blogPosts/testimonials maps; bookings/contacts lists; next*Id counters) and introduces a migration module whose run() is a no-op over an empty record type. There is no visible preupgrade/postupgrade (or stable variable) logic in the truncated backend/main.mo snippet to serialize/restore state or counters across upgrades.",
+      "evidence": [
+        "backend/migration.mo",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "On HomePage, each card in the “Holiday Packages” section displays the package title and the package details text (pkg.details), and long details remain accessible without being removed.",
+      "reason": "A modal dialog (PackageDetailsDialog) is added that displays pkg.details, but the provided HomePage diff snippet is truncated before the “Holiday Packages” card rendering, so it is not evidenced that each package card itself displays pkg.details (as required), rather than only showing it in a modal.",
+      "evidence": [
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/components/PackageDetailsDialog.tsx"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "If getActivePackages returns an empty list, HomePage shows a clear empty state message indicating no packages are available.",
+      "reason": "HomePage adds only a developer console warning when packages are fetched and empty; no user-visible empty state message is shown in the provided snippet.",
+      "evidence": [
+        "frontend/src/pages/HomePage.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "WhatsApp-based enquiry flow changes (e.g., ContactPage/EnquiryPage opening WhatsApp with pre-filled templates; shared WhatsApp link builder; floating WhatsApp button; TopBar WhatsApp link updates).",
+      "reason": "These features are described in the diff summary but are not requested by REQ-7/REQ-8/REQ-9, which focus on upgrade persistence and package details/empty states.",
+      "evidence": [
+        "frontend-file-summaries.txt",
+        "project_state.json"
+      ]
+    },
+    {
+      "description": "Global design-system/styling overhaul (OKLCH palette changes, Tailwind token extensions, widespread UI polish across multiple pages/components).",
+      "reason": "Not requested by REQ-7/REQ-8/REQ-9; the BuildRequest is specifically about preventing data loss on upgrades and restoring package details display plus an empty-state safeguard.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Adding new routing/pages unrelated to the package regression fix (e.g., an ‘enquiry’ page and related routing/header updates).",
+      "reason": "Not requested by REQ-7/REQ-8/REQ-9.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "confidence": 0.66,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/components/PackageDetailsDialog.tsx",
+    "frontend/src/pages/AdminDashboard.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "project_state.json"
+  ]
+}

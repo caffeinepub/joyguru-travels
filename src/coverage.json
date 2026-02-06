@@ -1,0 +1,63 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-06T04:53:31.221Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-7",
+        "summary": "Investigate and fix the regression where previously added Tour/Travel Package details disappeared after the latest deployment by persisting all existing backend stored data across canister upgrades (so admin-entered destinations/packages are not wiped on new versions).",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Ensure the Home page continues to show Travel Package details clearly for each package returned by getActivePackages, and that the UI does not regress to hiding or removing the package details text the admin entered.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/PackageDetailsDialog.tsx",
+          "frontend/src/pages/HomePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/PackageDetailsDialog.tsx",
+          "frontend/src/pages/HomePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add a basic developer-visible safeguard for empty Travel Packages caused by past upgrades (when data may already be lost), so admins can quickly detect the issue and re-add packages if needed.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/AdminDashboard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/AdminDashboard.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/PackageDetailsDialog.tsx",
+    "frontend/src/pages/AdminDashboard.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

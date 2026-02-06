@@ -1,0 +1,47 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-ensure-the-home-page-continues-to-show-travel-package-details-clearly-for-each-package-returned-by-getactivepackages-and-that-the-ui-does-not-regress-to-hiding-or-removing-the-package-details-text-the-admin-entered",
+      "featureTitle": "Ensure the Home page continues to show Travel Package details clearly for each package returned by getActivePackages, and that the UI does not regress to hiding or removing the package details text the admin entered.",
+      "files": [
+        "frontend/src/components/PackageDetailsDialog.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-basic-developer-visible-safeguard-for-empty-travel-packages-caused-by-past-upgrades-when-data-may-already-be-lost-so-admins-can-quickly-detect-the-issue-and-re-add-packages-if-needed",
+      "featureTitle": "Add a basic developer-visible safeguard for empty Travel Packages caused by past upgrades (when data may already be lost), so admins can quickly detect the issue and re-add packages if needed.",
+      "files": [
+        "frontend/src/pages/AdminDashboard.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

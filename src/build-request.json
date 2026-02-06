@@ -1,0 +1,84 @@
+{
+  "kind": "build_request",
+  "title": "Prevent tour package data loss on upgrades and restore tour package details display",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Investigate and fix the regression where previously added Tour/Travel Package details disappeared after the latest deployment by persisting all existing backend stored data across canister upgrades (so admin-entered destinations/packages are not wiped on new versions).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "you deleted my tour pacakge details that you added in previous page"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After upgrading/redeploying the canister to a new version, previously created Destinations and Travel Packages (including title/details/price/image/isActive) are still returned by backend query methods (e.g., getActiveDestinations, getActivePackages).",
+        "After upgrading/redeploying the canister, previously created Flights, Bookings, Contacts, Blog Posts, Testimonials, and User Profiles are still present and readable via the existing query methods used by the frontend.",
+        "ID counters (nextDestinationId, nextPackageId, nextFlightId, nextBookingId, nextBlogId, nextTestimonialId) continue from the previous values after upgrade (no ID reuse).",
+        "All upgrade logic remains within the single backend actor (backend/main.mo). A backend/migration.mo is only introduced/updated if required by the project’s conditional migration policy."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Ensure the Home page continues to show Travel Package details clearly for each package returned by getActivePackages, and that the UI does not regress to hiding or removing the package details text the admin entered.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "you deleted my tour pacakge details that you added in previous page"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On HomePage, each card in the “Holiday Packages” section displays the package title and the package details text (pkg.details) from the backend.",
+        "If the details text is long, it is still accessible (e.g., via expansion, modal, or non-destructive layout), rather than being silently removed from the UI.",
+        "All user-facing text remains in English."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Add a basic developer-visible safeguard for empty Travel Packages caused by past upgrades (when data may already be lost), so admins can quickly detect the issue and re-add packages if needed.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "you deleted my tour pacakge details that you added in previous page"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If getActivePackages returns an empty list, HomePage shows a clear empty state message indicating no packages are available.",
+        "AdminDashboard “Current Packages” continues to show the count and list of packages returned by the backend, making it obvious when packages are missing."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single-actor Motoko architecture (all logic in backend/main.mo).",
+    "Do not edit frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Use English for any user-facing text."
+  ],
+  "nonGoals": [
+    "Recovering tour package records that were already lost in a prior upgrade if they no longer exist in canister state (the fix should prevent future loss; missing historical data may need to be re-entered by an admin).",
+    "Adding new third-party databases or external persistence layers."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
