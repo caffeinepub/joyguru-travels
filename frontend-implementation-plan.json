@@ -1,0 +1,49 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Restore Version 28 Frontend Content and Layout",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Restore homepage layout, sections, and content from version 28 including hero section, promotional banners, domestic/international tour packages, flight search, destinations, blog posts, and testimonials",
+      "acceptanceCriteria": [
+        "The homepage displays all sections that were present in version 28 including domestic tours, international tours, flight search, destinations, blog posts, and testimonials",
+        "No sections from version 28 are missing from the current homepage",
+        "The layout and visual presentation matches the version 28 design",
+        "All existing sections from the current version (32) are preserved alongside the restored version 28 content"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Audit and restore all homepage sections from version 28. Ensure hero section, promotional banners, domestic tour packages section, international tour packages section, flight search widget, destinations showcase, blog posts section, and testimonials carousel are all present and properly rendered. Preserve all existing functionality from version 32 including WhatsApp integration and authentication flows. Reference generated hero image at frontend/public/assets/generated/airplane-hero.dim_1024x600.jpg and promotional banner at frontend/public/assets/generated/promo-banner.dim_1200x400.jpg if they were part of version 28 layout."
+        },
+        {
+          "path": "frontend/src/components/TopBar.tsx",
+          "operation": "modify",
+          "description": "Verify promotional banner content matches version 28 design. Ensure tagline and WhatsApp contact display are consistent with version 28 layout. Preserve existing WhatsApp link functionality."
+        },
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Audit header navigation structure and branding to match version 28. Ensure logo, navigation links, and authentication controls are positioned and styled as they appeared in version 28. Reference generated logo at frontend/public/assets/generated/joyguru-travels-logo-transparent.dim_300x100.png. Preserve current WhatsApp integration and Internet Identity authentication."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Restore footer content and layout from version 28. Ensure contact information, branding elements, and any footer links present in version 28 are included. Preserve copyright notice and existing structure."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Audit global styles and CSS custom properties to ensure visual presentation matches version 28 design system. Restore any color tokens, typography settings, or spacing variables that existed in version 28 but may have been altered. Preserve all current OKLCH-based tokens and dark mode support."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Review Tailwind configuration to restore any custom theme extensions, color definitions, or utility classes that were present in version 28. Ensure design system tokens align with version 28 visual specifications. Preserve current keyframe animations and extended spacing."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "kind": "build_request",
+  "title": "Restore Version 28 site content and layout",
+  "projectName": "Joyguru Travels",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Restore the homepage layout, sections, and content as it appeared in version 28 of the site. This includes restoring any hero section, promotional banners, domestic tour packages, international tour packages, flight search, destinations, blog posts, testimonials, and any other sections that were present in version 28 but may have been removed or altered in subsequent versions.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "add version 28 with this site"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The homepage displays all sections that were present in version 28 including domestic tours, international tours, flight search, destinations, blog posts, and testimonials",
+        "No sections from version 28 are missing from the current homepage",
+        "The layout and visual presentation matches the version 28 design",
+        "All existing sections from the current version (32) are preserved alongside the restored version 28 content"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Audit the backend data (destinations, travel packages, flights, blog posts, testimonials) and restore any records or hardcoded data that existed in version 28 but are missing in the current version.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "add version 28 with this site"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All hardcoded domestic and international destination records from version 28 are present in the backend",
+        "All travel package records from version 28 are present",
+        "No data regression between version 28 and the current state"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not remove or break any features added in versions 29–32",
+    "Preserve the current WhatsApp integration, Internet Identity authentication, and admin dashboard",
+    "Do not edit immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui"
+  ],
+  "nonGoals": [
+    "Introducing new features beyond what existed in version 28",
+    "Redesigning the visual theme",
+    "Changing the backend actor architecture"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

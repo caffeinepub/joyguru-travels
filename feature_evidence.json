@@ -1,0 +1,30 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-restore-the-homepage-layout-sections-and-content-as-it-appeared-in-version-28-of-the-site-this-includes-restoring-any-hero-section-promotional-banners-domestic-tour-packages-international-tour-packages-flight-search-destinations-blog-posts-testimonials-and-any-other-sections-that-were-present-in-version-28-but-may-have-been-removed-or-altered-in-subsequent-versions",
+      "featureTitle": "Restore the homepage layout, sections, and content as it appeared in version 28 of the site. This includes restoring any hero section, promotional banners, domestic tour packages, international tour packages, flight search, destinations, blog posts, testimonials, and any other sections that were present in version 28 but may have been removed or altered in subsequent versions.",
+      "files": [
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/Header.tsx",
+        "frontend/src/components/TopBar.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
